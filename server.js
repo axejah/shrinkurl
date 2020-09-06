@@ -19,7 +19,7 @@ app.use(favicon(path.join(__dirname, "public", "favicon.png")));
 app.use(express.json());
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", async (req, res) => {
   const shortUrls = await ShortUrl.find().limit(5).sort({ createdAt: -1 });
