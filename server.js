@@ -49,4 +49,7 @@ app.get("/:shortUrl", async (req, res) => {
   res.redirect(shortUrl.full);
 });
 
-app.listen(process.env.PORT || 5000);
+const port = process.env.PORT;
+
+app.listen(port || 5000);
+console.log(`Server started! Connected on port: ${port}`);
