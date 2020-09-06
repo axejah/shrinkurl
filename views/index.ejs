@@ -16,6 +16,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShrinkURL | Shrink your URLs</title>
+    <style>
+      button {
+        border: none;
+        background: transparent;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -51,7 +58,13 @@
               >
             </td>
             <td>
-              <a href="<%= shortUrl.short %>" target="_blank"
+              <button onclick="copyUrl('<%=shortUrl.short%>')">
+                <i id="copyShortUrl" class="far fa-copy mr-2" title="Copy"></i>
+              </button>
+              <a
+                id="<%= shortUrl.short %>"
+                href="<%= shortUrl.short %>"
+                target="_blank"
                 ><%= shortUrl.short %></a
               >
             </td>
@@ -78,5 +91,19 @@
         >
       </div>
     </footer>
+    <script>
+      function copyUrl(url) {
+        const link = document.getElementById(url).href;
+        const el = document.createElement("textarea");
+        el.value = link;
+        el.setAttribute("readonly", "");
+        el.style.position = "absolute";
+        el.style.left = "-9999px";
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+      }
+    </script>
   </body>
 </html>
