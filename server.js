@@ -6,6 +6,7 @@ const ShortUrl = require("./models/shortUrl");
 const mongoose = require("mongoose");
 const favicon = require("serve-favicon");
 const path = require("path");
+const rootFolder = process.env.BASE_FOLDER;
 
 mongoose.connect(process.env.MONGOOSE_URI, {
   useNewUrlParser: true,
@@ -25,7 +26,7 @@ app.get("/", async (req, res) => {
   res.render("index", { shortUrls: shortUrls, moment: moment });
 });
 
-app.post("/shortUrls", async (req, res) => {
+app.post(`${rootFolder}/shortUrls`, async (req, res) => {
   await ShortUrl.findOne({ full: req.body.fullURL }, (err, duplicate) => {
     if (err) console.log(err);
     if (duplicate) {
@@ -39,7 +40,7 @@ app.post("/shortUrls", async (req, res) => {
   });
 });
 
-app.get("/:shortUrl", async (req, res) => {
+app.get(`${rootFolder}/:shortUrl`, async (req, res) => {
   const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
   if (shortUrl == null) return res.sendStatus(404);
 
