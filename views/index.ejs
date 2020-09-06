@@ -31,7 +31,7 @@
         <label for="fullURL" class="sr-only">URL</label>
         <input
           required
-          value="https://"
+          placeholder="https://"
           type="url"
           name="fullURL"
           id="fullURL"
@@ -46,7 +46,6 @@
             <th>Full URL</th>
             <th>ShrinkURL</th>
             <th><i class="fas fa-mouse"></i> Clicks</th>
-            <th>Created At</th>
           </tr>
         </thead>
         <tbody>
@@ -69,12 +68,10 @@
               >
             </td>
             <td><%= shortUrl.clicks %></td>
-            <td>
-              <%= moment(shortUrl.createdAt).format('MM-DD-YYYY HH:MM') %>
-            </td>
+            <% }) %>
           </tr>
-          <% }) %>
         </tbody>
+
         <tfoot>
           <tr>
             <span class="text-muted">Showing last 5 shrinked URLs</span>

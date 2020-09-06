@@ -1,12 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
-const moment = require("moment");
 const ShortUrl = require("./models/shortUrl");
 const mongoose = require("mongoose");
 const favicon = require("serve-favicon");
 const path = require("path");
-const rootFolder = process.env.BASE_FOLDER;
 
 mongoose.connect(process.env.MONGOOSE_URI, {
   useNewUrlParser: true,
@@ -25,7 +23,10 @@ app.post("/shortUrls", async (req, res) => {
   await ShortUrl.findOne({ full: req.body.fullURL }, (err, duplicate) => {
     if (err) console.log(err);
     if (duplicate) {
-      res.render("already_exists", { url: req.body.fullURL });
+      console.log(duplicate);
+      res.render("already_exists", {
+        duplicate: duplicate,
+      });
     } else {
       ShortUrl.create({ full: req.body.fullURL }, (err, data) => {
         if (err) console.log(err);
@@ -47,7 +48,7 @@ app.get("/:shortUrl", async (req, res) => {
 
 app.get("/", async (req, res) => {
   const shortUrls = await ShortUrl.find().limit(5).sort({ createdAt: -1 });
-  res.render("index", { shortUrls: shortUrls, moment: moment });
+  res.render("index", { shortUrls: shortUrls });
 });
 
 const port = process.env.PORT;

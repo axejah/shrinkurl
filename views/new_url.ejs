@@ -24,9 +24,10 @@
     <div class="container">
       <h2 class="my-4">You've created a ShrinkURL!</h2>
       <h5 class="my-4">
-        <a href="https://kevines.herokuapp.com/<%= url.short %>" target="_blank"><%= url.short %></a>
+        <a id="<%= url.short %>" href="https://kevines.herokuapp.com/<%= url.short %>" target="_blank"><%= url.short %></a>
       </h5>
-      <button class="btn btn-primary" onclick="window.location.href='/'">
+      <button class="btn btn-success" onclick="copyUrl('<%=url.short%>')">Copy link to clipboard</button>
+      <button class="btn btn-secondary" onclick="window.location.href='/'">
         Create another ShrinkURL
       </button>
     </div>
@@ -40,5 +41,19 @@
           >
         </div>
       </footer>
+      <script>
+        function copyUrl(url) {
+          const link = document.getElementById(url).href;
+          const el = document.createElement("textarea");
+          el.value = link;
+          el.setAttribute("readonly", "");
+          el.style.position = "absolute";
+          el.style.left = "-9999px";
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand("copy");
+          document.body.removeChild(el);
+        }
+      </script>
   </body>
 </html>
