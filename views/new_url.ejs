@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous"
+  />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShrinkURL | New Shrink: <%= url.short %></title>
+  </head>
+  <body>
+    <body>
+        <div class="container">
+          <h1 class="my-5"><i class="fas fa-link"></i> ShrinkURL</h1>
+    <div class="container">
+      <h2 class="my-4">You've created a ShrinkURL!</h2>
+      <h5 class="my-4">
+        <a href="<%= url.short %>" target="_blank"><%= url.short %></a>
+      </h5>
+      <button class="btn btn-primary" onclick="window.location.href='/'">
+        Create another ShrinkURL
+      </button>
+    </div>
+    </div>
+    <footer class="footer mt-5">
+        <div class="container">
+          <span class="text-muted">&copy; 2020 kevines.tech | Kevin Soester</span>
+        </div>
+      </footer>
+  </body>
+</html>
