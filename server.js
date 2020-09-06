@@ -14,17 +14,12 @@ mongoose.connect(process.env.MONGOOSE_URI, {
 });
 
 const app = express();
-app.use(morgan("dev"));
+app.use(morgan("tiny"));
 app.use(favicon(path.join(__dirname, "public", "favicon.png")));
 app.use(express.json());
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
-
-app.get("/", async (req, res) => {
-  const shortUrls = await ShortUrl.find().limit(5).sort({ createdAt: -1 });
-  res.render("index", { shortUrls: shortUrls, moment: moment });
-});
 
 app.post("/shortUrls", async (req, res) => {
   await ShortUrl.findOne({ full: req.body.fullURL }, (err, duplicate) => {
@@ -48,6 +43,11 @@ app.get("/:shortUrl", async (req, res) => {
   shortUrl.save();
 
   res.redirect(shortUrl.full);
+});
+
+app.get("/", async (req, res) => {
+  const shortUrls = await ShortUrl.find().limit(5).sort({ createdAt: -1 });
+  res.render("index", { shortUrls: shortUrls, moment: moment });
 });
 
 const port = process.env.PORT;
